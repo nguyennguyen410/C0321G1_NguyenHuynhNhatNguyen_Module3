@@ -3,8 +3,7 @@ use furama_resort;
 
 create table KieuThue(
 id_kieu_thue int primary key,
-ten_kieu_thue varchar(45),
-gia int
+ten_kieu_thue varchar(45)
 );
 
 create table LoaiDichVu(
@@ -22,8 +21,8 @@ chi_phi_thue varchar(45),
 id_kieu_thue int,
 id_loai_dich_vu int,
 trang_thai varchar(45),
-foreign key (id_kieu_thue) references KieuThue(id_kieu_thue),
-foreign key (id_loai_dich_vu) references LoaiDichVu (id_loai_dich_vu)
+foreign key (id_kieu_thue) references KieuThue(id_kieu_thue) on update cascade on delete cascade,
+foreign key (id_loai_dich_vu) references LoaiDichVu (id_loai_dich_vu) on update cascade on delete cascade
 );
 
 create table DichVuDiKem(
@@ -48,7 +47,7 @@ so_cmtnd varchar(45),
 sdt varchar(45),
 email varchar(45),
 dia_chi varchar(45),
-foreign key (id_loai_khach) references LoaiKhach(id_loai_khach)
+foreign key (id_loai_khach) references LoaiKhach(id_loai_khach) on update cascade on delete cascade
 );
 
 create table ViTri(
@@ -78,9 +77,9 @@ luong varchar(45),
 sdt varchar(45),
 email varchar(45),
 dia_chi varchar(45),
-foreign key (id_vi_tri) references ViTri(id_vi_tri),
-foreign key (id_trinh_do) references TrinhDo(id_trinh_do),
-foreign key (id_bo_phan) references BoPhan(id_bo_phan)
+foreign key (id_vi_tri) references ViTri(id_vi_tri) on update cascade on delete cascade,
+foreign key (id_trinh_do) references TrinhDo(id_trinh_do) on update cascade on delete cascade,
+foreign key (id_bo_phan) references BoPhan(id_bo_phan) on update cascade on delete cascade
 );
 
 create table HopDong(
@@ -91,10 +90,9 @@ id_dich_vu int,
 ngay_lam_hop_dong date,
 ngay_ket_thuc date,
 tien_dat_coc int,
-tong_tien int,
-foreign key (id_nhan_vien) references NhanVien(id_nhan_vien),
-foreign key (id_khach_hang) references KhachHang(id_khach_hang),
-foreign key (id_dich_vu) references DichVu(id_dich_vu)
+foreign key (id_nhan_vien) references NhanVien(id_nhan_vien) on update cascade on delete cascade,
+foreign key (id_khach_hang) references KhachHang(id_khach_hang) on update cascade on delete cascade,
+foreign key (id_dich_vu) references DichVu(id_dich_vu) on update cascade on delete cascade
 );
 
 create table HopDongChiTiet(
@@ -102,10 +100,11 @@ id_hop_dong_chi_tiet int primary key,
 id_hop_dong int,
 id_dich_vu_di_kem int,
 so_luong int,
-foreign key (id_hop_dong) references HopDong(id_hop_dong),
-foreign key (id_dich_vu_di_kem) references DichVuDiKem(id_dich_vu_di_kem)
+foreign key (id_hop_dong) references HopDong(id_hop_dong) on update cascade on delete cascade,
+foreign key (id_dich_vu_di_kem) references DichVuDiKem(id_dich_vu_di_kem) on update cascade on delete cascade
 );
 
+-- Task 1
 insert into BoPhan (id_bo_phan, ten_bo_phan)
 values 
 (1, 'sale-marketing'),
@@ -121,8 +120,7 @@ values
 (3, 'chuyen vien'),
 (4, 'giam sat'),
 (5, 'quan ly'),
-(6, 'giam doc')
-;
+(6, 'giam doc');
 select * from ViTri;
 
 insert into TrinhDo (id_trinh_do, trinh_do)
@@ -156,12 +154,12 @@ values
 (5, 'member');
 select * from LoaiKhach;
 
-insert into KieuThue(id_kieu_thue, ten_kieu_thue, gia)
+insert into KieuThue(id_kieu_thue, ten_kieu_thue)
 values
-(1, 'nam', 100000000),
-(2, 'thang', 10000000),
-(3, 'ngay', 600000),
-(4, 'gio', 150000);
+(1, 'nam'),
+(2, 'thang'),
+(3, 'ngay'),
+(4, 'gio');
 
 insert into LoaiDichVu(id_loai_dich_vu, ten_loai_dich_vu)
 values
@@ -184,4 +182,51 @@ values
 (3, 3, 'Nguyen C', '1990-10-06', '201 575 113', '0905 888886', 'nc@hotmail.com', 'Quang Nam'),
 (4, 4, 'Nguyen D', '1990-10-07', '201 575 114', '0905 888885', 'nd@hotmail.com', 'Hoi An'),
 (5, 5, 'Nguyen E', '1990-10-08', '201 575 115', '0905 888884', 'ne@hotmail.com', 'Tam Ky');
+
+insert into DichVu
+values
+(1, 'villa 1', 300, 2, '20 nguoi', '10000000', 1, 1, 'hoat dong'),
+(2, 'villa 2', 300, 3, '20 nguoi', '10000000', 2, 1, 'hoat dong'),
+(3, 'House 1', 200, 2, '10 nguoi', '30000000', 1, 2, 'hoat dong'),
+(4, 'House 2', 200, 2, '10 nguoi', '30000000', 1, 2, 'hoat dong'),
+(5, 'Room 1', 100, 1, '5 nguoi', '2000000', 3, 3, 'hoat dong'),
+(6, 'Room 2', 100, 1, '5 nguoi', '2000000', 3, 3, 'sua chua');
+
+insert into HopDong
+values
+(1, 1, 1, 1, '2021-06-15', '2021-06-17', 1000000),
+(2, 1, 2, 3, '2021-03-15', '2021-03-17', 1000000),
+(3, 1, 3, 5, '2021-02-15', '2021-02-17', 1000000),
+(4, 1, 2, 6, '2021-09-15', '2020-09-15', 1000000);
+
+insert into HopDongChiTiet
+values
+(1, 1, 1, 2),
+(2, 2, 2, 1),
+(3, 3, 3, 1),
+(4, 4, 4, 1);
+
+-- 2.	Hiển thị thông tin của tất cả nhân viên có trong hệ thống có tên bắt đầu là một trong các ký tự “H”, “T” hoặc “K” và có tối đa 15 ký tự.
+select *
+from NhanVien
+where ho_ten like 'H%' and length(ho_ten)<=15;
+--  3.	Hiển thị thông tin của tất cả khách hàng có độ tuổi từ 18 đến 50 tuổi và có địa chỉ ở “Đà Nẵng” hoặc “Quảng Trị”.
+select * from KhachHang
+where (year(ngay_sinh) >= 1971 and year(ngay_sinh)<=2003) and (dia_chi = 'Da Nang' or dia_chi = 'Quang Tri');
+
+-- 4.	Đếm xem tương ứng với mỗi khách hàng đã từng đặt phòng bao nhiêu lần. Kết quả hiển thị được sắp xếp tăng dần theo số lần đặt phòng của khách hàng. 
+--      Chỉ đếm những khách hàng nào có Tên loại khách hàng là “Diamond”.
+select HopDong.id_khach_hang, count(HopDong.id_khach_hang) as count, LoaiKhach.ten_loai_khach
+from KhachHang
+inner join HopDong on KhachHang.id_khach_hang = HopDong.id_khach_hang
+inner join LoaiKhach on KhachHang.id_loai_khach = LoaiKhach.id_loai_khach
+where KhachHang.id_loai_khach = 1
+group by id_khach_hang
+order by count desc;
+
+-- 5.	Hiển thị IDKhachHang, HoTen, TenLoaiKhach, IDHopDong, TenDichVu, NgayLamHopDong, NgayKetThuc, 
+-- TongTien (Với TongTien được tính theo công thức như sau: ChiPhiThue + SoLuong*Gia, với SoLuong và Giá là từ bảng DichVuDiKem) cho tất cả các Khách hàng đã từng đặt phỏng. 
+-- (Những Khách hàng nào chưa từng đặt phòng cũng phải hiển thị ra).
+
+
 
