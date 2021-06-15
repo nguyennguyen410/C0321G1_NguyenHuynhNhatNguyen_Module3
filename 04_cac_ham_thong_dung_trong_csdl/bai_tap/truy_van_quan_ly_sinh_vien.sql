@@ -150,5 +150,5 @@ inner join subject on mark.subid = subject.subid
 inner join student on mark.studentid = student.studentid
 group by student.studentid
 order by avgdiem desc;
-
+use quanlysinhvien;
 

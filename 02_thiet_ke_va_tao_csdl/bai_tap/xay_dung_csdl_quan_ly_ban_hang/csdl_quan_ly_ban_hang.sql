@@ -84,7 +84,6 @@ from orderdetail o
 inner join order1 o1 on o.order_id = o1.order_id
 inner join product p on p.product_id = o.product_id;
 
- 
 
 
 

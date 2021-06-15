@@ -205,7 +205,7 @@ values
 (2, 2, 2, 1),
 (3, 3, 3, 1),
 (4, 4, 4, 1);
-
+use furama_resort;
 -- 2.	Hiển thị thông tin của tất cả nhân viên có trong hệ thống có tên bắt đầu là một trong các ký tự “H”, “T” hoặc “K” và có tối đa 15 ký tự.
 select *
 from NhanVien
@@ -227,6 +227,72 @@ order by count desc;
 -- 5.	Hiển thị IDKhachHang, HoTen, TenLoaiKhach, IDHopDong, TenDichVu, NgayLamHopDong, NgayKetThuc, 
 -- TongTien (Với TongTien được tính theo công thức như sau: ChiPhiThue + SoLuong*Gia, với SoLuong và Giá là từ bảng DichVuDiKem) cho tất cả các Khách hàng đã từng đặt phỏng. 
 -- (Những Khách hàng nào chưa từng đặt phòng cũng phải hiển thị ra).
+select k.id_khach_hang, ho_ten, ten_loai_khach, h.id_hop_dong, ten_dich_vu, ngay_lam_hop_dong, ngay_ket_thuc, (chi_phi_thue+gia*so_luong) as tong_tien
+from KhachHang k
+left join LoaiKhach l on k.id_loai_khach = l.id_loai_khach
+left join HopDong h on h.id_khach_hang = k.id_khach_hang
+left join DichVu d on d.id_dich_vu = h.id_dich_vu
+left join HopDongChiTiet hd on h.id_hop_dong = hd.id_hop_dong
+left join DichVuDiKem dv on dv.id_dich_vu_di_kem = hd.id_dich_vu_di_kem;
+
+-- 6.	Hiển thị IDDichVu, TenDichVu, DienTich, ChiPhiThue, TenLoaiDichVu của tất cả các loại Dịch vụ 
+-- chưa từng được Khách hàng thực hiện đặt từ quý 1 của năm 2019 (Quý 1 là tháng 1, 2, 3).
+select *
+from (select id_dich_vu, ten_dich_vu, dien_tich, chi_phi_thue, ten_loai_dich_vu
+from DichVu 
+left join LoaiDichVu on loaidichvu.id_loai_dich_vu = dichvu.id_loai_dich_vu
+union
+select id_dich_vu, ten_dich_vu, dien_tich, chi_phi_thue, ten_loai_dich_vu
+from DichVu
+right join LoaiDichVu on loaidichvu.id_loai_dich_vu = dichvu.id_loai_dich_vu) temp
+left join HopDong h on temp.id_dich_vu = h.id_dich_vu
+where (not (month(ngay_lam_hop_dong) not in (01,02,03) and year(ngay_lam_hop_dong) = 2019)) or (h.id_dich_vu is null);
+
+-- 7.	Hiển thị thông tin IDDichVu, TenDichVu, DienTich, SoNguoiToiDa, ChiPhiThue, TenLoaiDichVu của tất cả các loại dịch vụ 
+-- đã từng được Khách hàng đặt phòng trong năm 2018 nhưng chưa từng được Khách hàng đặt phòng  trong năm 2019.
+insert into HopDong
+values
+(5, 1, 1, 1, '2018-06-15', '2021-06-17', 1000000),
+(6, 1, 2, 3, '2019-03-15', '2021-03-17', 1000000);
+
+select temp.id_dich_vu, temp.ten_dich_vu, temp.dien_tich, temp.so_nguoi_toi_da, temp.chi_phi_thue, temp.ten_loai_dich_vu, temp.ngay_lam_hop_dong
+from
+(select h.id_dich_vu, ten_dich_vu, dien_tich, so_nguoi_toi_da, chi_phi_thue, ten_loai_dich_vu, ngay_lam_hop_dong
+from DichVu d
+inner join LoaiDichVu l on l.id_loai_dich_vu = d.id_loai_dich_vu
+inner join hopdong h on h.id_dich_vu = d.id_dich_vu
+where year(ngay_lam_hop_dong) = 2018) temp
+left join (
+select h.id_dich_vu, ten_dich_vu, dien_tich, so_nguoi_toi_da, chi_phi_thue, ten_loai_dich_vu, ngay_lam_hop_dong
+from DichVu d
+inner join LoaiDichVu l on l.id_loai_dich_vu = d.id_loai_dich_vu
+inner join hopdong h on h.id_dich_vu = d.id_dich_vu
+where year(ngay_lam_hop_dong) = 2019) temp1 on temp.id_dich_vu = temp1.id_dich_vu
+where temp1.id_dich_vu is null;
+
+-- 8.	Hiển thị thông tin HoTenKhachHang có trong hệ thống, với yêu cầu HoThenKhachHang không trùng nhau.
+-- Học viên sử dụng theo 3 cách khác nhau để thực hiện yêu cầu trên
+select ho_ten from Khachhang group by ho_ten;
+select distinct ho_ten from KhachHang;
+select ho_ten from Khachhang
+union
+select ho_ten from KhachHang;
+
+-- 9.	Thực hiện thống kê doanh thu theo tháng, nghĩa là tương ứng với mỗi tháng trong năm 2019 thì sẽ có bao nhiêu khách hàng thực hiện đặt phòng.
+select month(ngay_lam_hop_dong) as `month`, count(h.id_khach_hang) as so_luong_dat
+from HopDong h
+inner join KhachHang k on k.id_khach_hang = h.id_khach_hang
+group by `month`;
+
+-- 10.	Hiển thị thông tin tương ứng với từng Hợp đồng thì đã sử dụng bao nhiêu Dịch vụ đi kèm. 
+-- Kết quả hiển thị bao gồm IDHopDong, NgayLamHopDong, NgayKetthuc, TienDatCoc, SoLuongDichVuDiKem (được tính dựa trên việc count các IDHopDongChiTiet).
+select h.id_hop_dong, h.ngay_lam_hop_dong, h.ngay_ket_thuc, h.tien_dat_coc, count(id_hop_dong_chi_tiet) as so_luong_dich_vu_di_kem
+from HopDong h
+left join HopDongChiTiet hd on h.id_hop_dong = hd.id_hop_dong
+group by h.id_hop_dong;
+
+-- 11.	Hiển thị thông tin các Dịch vụ đi kèm đã được sử dụng bởi những Khách hàng có TenLoaiKhachHang là “Diamond” và có địa chỉ là “Vinh” hoặc “Quảng Ngãi”.
+
 
 
 
