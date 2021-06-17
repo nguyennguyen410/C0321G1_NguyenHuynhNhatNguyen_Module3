@@ -292,7 +292,191 @@ left join HopDongChiTiet hd on h.id_hop_dong = hd.id_hop_dong
 group by h.id_hop_dong;
 
 -- 11.	Hiển thị thông tin các Dịch vụ đi kèm đã được sử dụng bởi những Khách hàng có TenLoaiKhachHang là “Diamond” và có địa chỉ là “Vinh” hoặc “Quảng Ngãi”.
+insert into KhachHang(id_khach_hang, id_loai_khach, ho_ten, ngay_sinh, so_cmtnd, sdt, email, dia_chi)
+values
+(6, 1, 'Nguyen AB', '1990-10-04', '201 575 111', '0905 888888', 'nab@hotmail.com', 'Vinh'),
+(7, 2, 'Nguyen BC', '1990-10-05', '201 575 112', '0905 888887', 'nbc@hotmail.com', 'Quang Ngai');
+
+insert into HopDong
+values
+(7, 2, 6, 5, '2021-06-15', '2021-06-17', 1000000),
+(8, 2, 7, 6, '2021-03-15', '2021-03-17', 1000000);
+
+insert into HopDongChiTiet
+values
+(5, 7, 1, 2),
+(6, 8, 1, 2);
+
+select k.ho_ten, l.ten_loai_khach, d.ten_dich_vu_di_kem, k.dia_chi
+from HopDong h
+inner join Khachhang k on h.id_khach_hang = k.id_khach_hang
+inner join LoaiKhach l on l.id_loai_khach = k.id_loai_khach
+inner join HopDongChiTiet hd on hd.id_hop_dong = h.id_hop_dong
+inner join DichVuDiKem d on d.id_dich_vu_di_kem = hd.id_dich_vu_di_kem
+where l.ten_loai_khach = 'diamond' and (k.dia_chi = 'Vinh' or k.dia_chi='QuangNgai');
+
+-- 12.	Hiển thị thông tin IDHopDong, TenNhanVien, TenKhachHang, SoDienThoaiKhachHang, TenDichVu, SoLuongDichVuDikem (được tính dựa trên tổng Hợp đồng chi tiết), 
+-- TienDatCoc của tất cả các dịch vụ đã từng được khách hàng đặt vào 3 tháng cuối năm 2019 nhưng chưa từng được khách hàng đặt vào 6 tháng đầu năm 2019.
+select temp.id_hop_dong, temp.ho_ten, temp.ten, temp.sdt, temp.ten_dich_vu, temp.so_luong
+from
+(select h.id_hop_dong, k.ho_ten, (n.ho_ten) ten, k.sdt, d.ten_dich_vu, hd.so_luong
+from HopDong h
+inner join Khachhang k on h.id_khach_hang = k.id_khach_hang
+inner join HopDongChiTiet hd on hd.id_hop_dong = h.id_hop_dong
+inner join DichVu d on d.id_dich_vu = h.id_dich_vu
+inner join NhanVien n on n.id_nhan_vien = h.id_nhan_vien
+where month(h.ngay_lam_hop_dong ) in (10,11,12) and year(h.ngay_lam_hop_dong) = 2021) temp
+left join
+(select h.id_hop_dong, k.ho_ten, (n.ho_ten) ten, k.sdt, d.ten_dich_vu, hd.so_luong
+from HopDong h
+inner join Khachhang k on h.id_khach_hang = k.id_khach_hang
+inner join HopDongChiTiet hd on hd.id_hop_dong = h.id_hop_dong
+inner join DichVu d on d.id_dich_vu = h.id_dich_vu
+inner join NhanVien n on n.id_nhan_vien = h.id_nhan_vien
+where month(h.ngay_lam_hop_dong ) in (01,02,03,04,05,06) and year(h.ngay_lam_hop_dong) = 2021) temp1
+on temp.id_hop_dong = temp1.id_hop_dong
+where temp.id_hop_dong is null;
+
+-- 13.	Hiển thị thông tin các Dịch vụ đi kèm được sử dụng nhiều nhất bởi các Khách hàng đã đặt phòng. (Lưu ý là có thể có nhiều dịch vụ có số lần sử dụng nhiều như nhau).
+select count(dv.ten_dich_vu_di_kem) as so_lan_dat, dv.ten_dich_vu_di_kem, dv.gia
+from HopDong h
+inner join HopDongChiTiet hd on hd.id_hop_dong = h.id_hop_dong
+inner join DichVuDiKem dv on dv.id_dich_vu_di_kem = hd.id_dich_vu_di_kem
+group by dv.ten_dich_vu_di_kem;
+
+-- 14.	Hiển thị thông tin tất cả các Dịch vụ đi kèm chỉ mới được sử dụng một lần duy nhất. Thông tin hiển thị bao gồm IDHopDong, TenLoaiDichVu, TenDichVuDiKem, SoLanSuDung.
+select hd.id_hop_dong, d.ten_dich_vu, dv.ten_dich_vu_di_kem, count(dv.ten_dich_vu_di_kem) as so_lan_su_dung
+from HopDong h
+inner join HopDongChiTiet hd on hd.id_hop_dong = h.id_hop_dong
+inner join DichVuDiKem dv on dv.id_dich_vu_di_kem = hd.id_dich_vu_di_kem
+inner join DichVu d on d.id_dich_vu = h.id_dich_vu
+group by dv.ten_dich_vu_di_kem
+having count(dv.ten_dich_vu_di_kem) = 1;
+
+-- 15.	Hiển thi thông tin của tất cả nhân viên bao gồm IDNhanVien, HoTen, TrinhDo, TenBoPhan, SoDienThoai, DiaChi mới chỉ lập được tối đa 3 hợp đồng từ năm 2018 đến 2019.
+select h.id_nhan_vien, n.ho_ten, t.trinh_do, b.ten_bo_phan, n.sdt, n.dia_chi, count(h.id_nhan_vien) as so_lan_lap_hop_dong
+from HopDong h
+inner join NhanVien n on n.id_nhan_vien = h.id_nhan_vien
+inner join ViTri v on v.id_vi_tri = n.id_vi_tri
+inner join TrinhDo t on t.id_trinh_do = n.id_trinh_do
+inner join BoPhan b on b.id_bo_phan = n.id_bo_phan
+where year(h.ngay_lam_hop_dong) in (2020,2021)
+group by(h.id_nhan_vien)
+having count(h.id_nhan_vien) <=3;
+
+-- 16.	Xóa những Nhân viên chưa từng lập được hợp đồng nào từ năm 2017 đến năm 2019.
+select * 
+from NhanVien n 
+left join 
+(select *
+from HopDong h
+where year(h.ngay_lam_hop_dong) in (2020,2021)) temp 
+on n.id_nhan_vien = temp.id_nhan_vien
+where temp.id_nhan_vien is null;
+
+-- 17.	Cập nhật thông tin những khách hàng có TenLoaiKhachHang từ  Platinium lên Diamond, 
+-- chỉ cập nhật những khách hàng đã từng đặt phòng với tổng Tiền thanh toán trong năm 2019 là lớn hơn 10.000.000 VNĐ.
+create temporary table temp_table (select h.id_khach_hang
+from HopDong h
+inner join HopDongChiTiet hd on hd.id_hop_dong = h.id_hop_dong
+inner join DichVuDiKem dv on dv.id_dich_vu_di_kem = hd.id_dich_vu_di_kem
+inner join DichVu d on d.id_dich_vu = h.id_dich_vu
+inner join Khachhang k on h.id_khach_hang = k.id_khach_hang
+inner join LoaiKhach l on l.id_loai_khach = k.id_loai_khach
+where year(h.ngay_lam_hop_dong) = 2021 and l.ten_loai_khach = 'platinium'
+group by h.id_khach_hang
+having sum(chi_phi_thue+gia*so_luong)>10000000); 
+
+update Khachhang
+set khachhang.id_loai_khach = 1
+where khachhang.id_khach_hang in (select * from temp_table);
+
+-- 18.	Xóa những khách hàng có hợp đồng trước năm 2016 (chú ý ràngbuộc giữa các bảng).
+insert into HopDong
+values
+(9, 1, 5, 4, '2016-06-15', '2016-06-17', 1000000);
+
+create temporary table temp_table1(select k.id_khach_hang from HopDong h
+inner join KhachHang k on k.id_khach_hang = h.id_khach_hang
+where year(h.ngay_lam_hop_dong) <= 2016);
+
+delete from KhachHang
+where id_khach_hang in (select * from temp_table1);
+
+-- 19.	Cập nhật giá cho các Dịch vụ đi kèm được sử dụng trên 10 lần trong năm 2019 lên gấp đôi.
+create temporary table temp_table2(select hd.id_dich_vu_di_kem, count(hd.id_dich_vu_di_kem) as so_lan, dv.gia
+from hopdong h
+inner join hopdongchitiet hd on h.id_hop_dong = hd.id_hop_dong
+inner join dichvudikem dv on dv.id_dich_vu_di_kem = hd.id_dich_vu_di_kem
+group by hd.id_dich_vu_di_kem
+having count(hd.id_dich_vu_di_kem) >=2);
+
+update dichvudikem dv
+set dv.gia = dv.gia * 2
+where dv.id_dich_vu_di_kem in (select id_dich_vu_di_kem from temp_table2);
+
+-- 20.	Hiển thị thông tin của tất cả các Nhân viên và Khách hàng có trong hệ thống, 
+-- thông tin hiển thị bao gồm ID (IDNhanVien, IDKhachHang), HoTen, Email, SoDienThoai, NgaySinh, DiaChi.
+
+select id_khach_hang as id, ho_ten, ngay_sinh, so_cmtnd, sdt, email, dia_chi
+from khachhang
+union all
+select id_nhan_vien, ho_ten, ngay_sinh, so_cmtnd, sdt, email, dia_chi
+from nhanvien;
 
 
+-- 21.	Tạo khung nhìn có tên là V_NHANVIEN để lấy được thông tin của tất cả các nhân viên có địa chỉ là “Hải Châu” 
+-- và đã từng lập hợp đồng cho 1 hoặc nhiều Khách hàng bất kỳ  với ngày lập hợp đồng là “12/12/2019”
+insert into HopDong
+values
+(10, 1, 3, 4, '2019-12-12', '2019-12-15', 1000000);
 
+create view v_nhanvien as
+select n.ho_ten, n.dia_chi 
+from nhanvien n
+inner join hopdong h on h.id_nhan_vien = n.id_nhan_vien
+where h.ngay_lam_hop_dong = '2019-12-12';
 
+-- 22.	Thông qua khung nhìn V_NHANVIEN thực hiện cập nhật địa chỉ thành “Liên Chiểu” đối với tất cả các Nhân viên được nhìn thấy bởi khung nhìn này.
+update v_nhanvien
+set dia_chi = 'Lien Chieu';
+
+-- 23.	Tạo Clustered Index có tên là IX_KHACHHANG trên bảng Khách hàng.
+-- Giải thích lý do và thực hiện kiểm tra tính hiệu quả của việc sử dụng INDEX
+explain select * from khachhang where id_khach_hang = 2;
+create unique index ix_khachhang on KhachHang(id_khach_hang);
+drop index ix_khachhang on khachhang;
+
+-- 24.	Tạo Non-Clustered Index có tên là IX_SoDT_DiaChi trên các cột SODIENTHOAI và DIACHI trên bảng KHACH HANG và kiểm tra tính hiệu quả tìm kiếm sau khi tạo Index.
+explain select * from khachhang where dia_chi='Da Nang' or sdt='0905 888883';
+create unique index ix_sodt_diachi on khachhang(sdt, dia_chi);
+drop index ix_sodt_diachi on khachhang;
+
+-- 25.	Tạo Store procedure Sp_1 Dùng để xóa thông tin của một Khách hàng nào đó với Id Khách hàng được truyền vào như là 1 tham số của Sp_1
+insert into KhachHang(id_khach_hang, id_loai_khach, ho_ten, ngay_sinh, so_cmtnd, sdt, email, dia_chi)
+values
+(8, 2, 'Nguyen ABC', '1990-10-04', '201 575 111', '0905 888777', 'nabc@hotmail.com', 'Hai Chau');
+DELIMITER //
+CREATE PROCEDURE sp_1(in id int)
+BEGIN
+  delete from KhachHang
+  where id_khach_hang = id;
+END //
+DELIMITER ;
+call sp_1(8);
+
+-- 26.	Tạo Store procedure Sp_2 Dùng để thêm mới vào bảng HopDong với yêu cầu Sp_2 phải thực hiện kiểm tra tính hợp lệ của dữ liệu bổ sung, 
+-- với nguyên tắc không được trùng khóa chính và đảm bảo toàn vẹn tham chiếu đến các bảng liên quan.
+DELIMITER //
+CREATE PROCEDURE sp_2(
+in id_hop_dong int, 
+in id_nhan_vien int, 
+in id_khach_hang int, 
+in id_dich_vu int, 
+in ngay_lam_hop_dong date, 
+in ngay_ket_thuc date, tien_dat_coc int)
+BEGIN
+  insert into hopdong
+  values (id_hop_dong, id_nhan_vien, id_khach_hang, id_dich_vu, ngay_lam_hop_dong, ngay_ket_thuc, tien_dat_coc);
+END //
+DELIMITER ;
