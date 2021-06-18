@@ -576,3 +576,25 @@ BEGIN
 END //
 DELIMITER ;
 call sp_3();
+
+insert into KhachHang(id_khach_hang, id_loai_khach, ho_ten, ngay_sinh, so_cmtnd, sdt, email, dia_chi)
+values
+(11, 1, 'Nguyen F', '1990-10-04', '201 575 116', '0905 888883', 'nf@hotmail.com', 'Hai Chau'),
+(12, 2, 'Huynh G', '1990-10-05', '201 575 217', '0905 888882', 'hg@hotmail.com', 'Vinh'),
+(13, 3, 'Nguyen H', '1990-10-06', '201 575 318', '0905 888881', 'nh@hotmail.com', 'Quang Ngai'),
+(9, 4, 'Huynh I', '1990-10-07', '201 575 414', '0905 888880', 'hi@hotmail.com', 'Vinh'),
+(10, 5, 'Nguyen J', '1990-10-08', '201 575 515', '0905 888877', 'nj@hotmail.com', 'Tam Ky');
+
+insert into HopDong
+values
+(11, 4, 11, 2, '2021-06-13', '2021-06-21', 1000000),
+(12, 5, 12, 4, '2021-03-15', '2021-03-17', 1000000),
+(13, 6, 13, 6, '2021-02-01', '2021-02-04', 1000000),
+(14, 7, 9, 6, '2021-09-15', '2020-09-20', 1000000);
+
+insert into HopDongChiTiet
+values
+(11, 11, 1, 2),
+(12, 12, 2, 4),
+(13, 13, 3, 3),
+(14, 14, 4, 3);
