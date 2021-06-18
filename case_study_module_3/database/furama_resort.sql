@@ -476,7 +476,103 @@ in id_dich_vu int,
 in ngay_lam_hop_dong date, 
 in ngay_ket_thuc date, tien_dat_coc int)
 BEGIN
+if(id_hop_dong not in (select id_hop_dong from hopdong))
+then
   insert into hopdong
   values (id_hop_dong, id_nhan_vien, id_khach_hang, id_dich_vu, ngay_lam_hop_dong, ngay_ket_thuc, tien_dat_coc);
+end if;
 END //
 DELIMITER ;
+
+-- 27.	Tạo triggers có tên Tr_1 Xóa bản ghi trong bảng HopDong thì hiển thị tổng số lượng bản ghi còn lại có trong bảng HopDong ra giao diện console của database
+DELIMITER //
+create trigger tr_1
+after delete on hopdong
+for each row
+begin
+	select count(id_hop_dong) into @soluong
+    from hopdong;
+end //
+DELIMITER ;
+delete from hopdong
+where id_hop_dong = 4;
+select @soluong as so_hop_dong_con_lai;
+
+-- 28.	Tạo triggers có tên Tr_2 Khi cập nhật Ngày kết thúc hợp đồng, cần kiểm tra xem thời gian cập nhật có phù hợp hay không, với quy tắc sau: 
+-- Ngày kết thúc hợp đồng phải lớn hơn ngày làm hợp đồng ít nhất là 2 ngày. Nếu dữ liệu hợp lệ thì cho phép cập nhật, 
+-- nếu dữ liệu không hợp lệ thì in ra thông báo “Ngày kết thúc hợp đồng phải lớn hơn ngày làm hợp đồng ít nhất là 2 ngày” trên console của database
+delimiter //
+create trigger tr_2 
+before update on hopdong 
+for each row
+begin
+    set @e = 'Ngay ket thuc khong hop le ';
+    if  datediff(new.ngay_ket_thuc, old.ngay_lam_hop_dong)<2 then
+    SIGNAL SQLSTATE '45000' set message_text= @e;
+    end if;
+end//
+DELIMITER ;
+drop trigger tr_2;
+update hopdong
+set ngay_ket_thuc = '2021-03-20'
+where id_hop_dong = 2;
+
+-- 29.	Tạo user function thực hiện yêu cầu sau:
+-- a.	Tạo user function func_1: Đếm các dịch vụ đã được sử dụng với Tổng tiền là > 2.000.000 VNĐ.
+-- b.	Tạo user function Func_2: Tính khoảng thời gian dài nhất tính từ lúc bắt đầu làm hợp đồng đến lúc kết thúc hợp đồng mà Khách hàng đã thực hiện thuê dịch vụ
+-- (lưu ý chỉ xét các khoảng thời gian dựa vào từng lần làm hợp đồng thuê dịch vụ, không xét trên toàn bộ các lần làm hợp đồng). 
+-- Mã của Khách hàng được truyền vào như là 1 tham số của function này.
+create temporary table temp_table (select d.ten_dich_vu,  (chi_phi_thue+gia*so_luong) as tong_tien
+    from hopdong h
+    inner join hopdongchitiet hd on hd.id_hop_dong = h.id_hop_dong
+    inner join dichvudikem dv on hd.id_dich_vu_di_kem = dv.id_dich_vu_di_kem
+    inner join dichvu d on d.id_dich_vu = h.id_dich_vu
+    where (chi_phi_thue+gia*so_luong) > 2000000);
+delimiter //
+create function func_1() returns int
+reads sql data
+deterministic
+begin
+	declare dem int;
+    select count(tong_tien) into dem
+    from temp_table;
+    return dem;
+end //
+delimiter ;
+
+select func_1();
+
+delimiter //
+create function func_2(id_khach_hang int) returns int
+reads sql data
+deterministic
+begin
+	declare songaythue int;
+    select max(so_ngay_thue)
+    from (select datediff(ngay_ket_thuc, ngay_lam_hop_dong) as so_ngay_thue
+    from hopdong h 
+    where h.id_khach_hang = id_khach_hang) as thoi_gian_dat into songaythue;
+    return songaythue;
+end //
+delimiter ;
+select func_2(3);
+
+-- 30.	Tạo Stored procedure Sp_3 để tìm các dịch vụ được thuê bởi khách hàng với loại dịch vụ là “Room” từ đầu năm 2015 đến hết năm 2019 
+-- để xóa thông tin của các dịch vụ đó (tức là xóa các bảng ghi trong bảng DichVu) và xóa những HopDong sử dụng dịch vụ liên quan 
+-- (tức là phải xóa những bản gi trong bảng HopDong) và những bản liên quan khác.
+create temporary table temp_table_30(select d.id_dich_vu 
+from hopdong h
+inner join dichvu d on d.id_dich_vu = h.id_dich_vu
+inner join loaidichvu l on l.id_loai_dich_vu = d.id_loai_dich_vu
+where (h.ngay_lam_hop_dong > '2015-01-01' and h.ngay_lam_hop_dong < '2021-12-31') and l.ten_loai_dich_vu = 'Room');
+
+DELIMITER //
+CREATE PROCEDURE sp_3()
+BEGIN
+  delete from dichvu
+  where id_dich_vu in (select * from temp_table_30);
+  delete from hopdong
+  where id_dich_vu in (select * from temp_table_30);
+END //
+DELIMITER ;
+call sp_3();
