@@ -391,7 +391,7 @@ update Khachhang
 set khachhang.id_loai_khach = 1
 where khachhang.id_khach_hang in (select * from temp_table);
 
--- 18.	Xóa những khách hàng có hợp đồng trước năm 2016 (chú ý ràngbuộc giữa các bảng).
+-- 18.	Xóa những khách hàng có hợp đồng trước năm 2016 (chú ý ràng buộc giữa các bảng).
 insert into HopDong
 values
 (9, 1, 5, 4, '2016-06-15', '2016-06-17', 1000000);
