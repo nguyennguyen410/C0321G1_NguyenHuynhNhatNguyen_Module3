@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tao layout</title>
+    <style>
+        .container {
+            grid-gap: 2px;
+            background-color: beige ;
+            display: grid;
+            grid-template-areas:
+                'header header header header header header'
+                'nav nav nav nav nav nav'
+                'section section section section aside aside'
+                'article article article article aside aside'
+                'footer footer footer footer footer footer';
+        }
+        .container div{
+            border: solid 1px;
+            text-align: center;
+        }
+        .header {grid-area: header}
+        .nav {grid-area: nav}
+        .section {grid-area: section}
+        .article {grid-area: article}
+        .aside {grid-area: aside}
+        .footer {grid-area: footer}
+    </style>
+
+</head>
+<body>
+<div class="container">
+    <div class="header">Header</div>
+    <div class="nav">Nav</div>
+    <div class="section">Section<br>
+        jksdddddddddddddddddddddddddddddddddddddddd<br>
+        jksdddddddddddddddddddddddddddddddddddddddd<br>
+        jksdddddddddddddddddddddddddddddddddddddddd<br>
+        jksdddddddddddddddddddddddddddddddddddddddd<br>
+        jksdddddddddddddddddddddddddddddddddddddddd<br>
+        jksdddddddddddddddddddddddddddddddddddddddd<br>
+        jksdddddddddddddddddddddddddddddddddddddddd</div>
+    <div class="article">Article
+        <br>
+        jksdddddddddddddddddddddddddddddddddddddddd<br>
+        jksdddddddddddddddddddddddddddddddddddddddd<br>
+        jksdddddddddddddddddddddddddddddddddddddddd<br>
+        jksdddddddddddddddddddddddddddddddddddddddd<br>
+        jksdddddddddddddddddddddddddddddddddddddddd<br>
+        jksdddddddddddddddddddddddddddddddddddddddd<br></div>
+    <div class="aside">Aside</div>
+    <div class="footer">Footer</div>
+</div>
+</body>
+</html>

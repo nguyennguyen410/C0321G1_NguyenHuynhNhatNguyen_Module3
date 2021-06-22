@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Index</title>
+    <style>
+        .container{
+            background-color: beige;
+            display: grid;
+            grid-template-areas:
+                'header header header header'
+                'sidebar content content sidebar1';
+            position: relative;
+        }
+        .header{
+           position: fixed;
+        }
+
+        .header {grid-area: header}
+        .sidebar {grid-area: sidebar}
+        .content {grid-area: content}
+        .sidebar1 {grid-area: sidebar1}
+    </style>
+</head>
+<body>
+<div class = "container">
+    <div class="header"><img style="width: 100%" src="header.JPG"></div>
+    <div class="sidebar"><img src="sidebar.JPG" style="width: 100%"></div>
+    <div class="content"><img src="content.JPG" style="width: 100%">
+        <img src="content1.JPG" style="width: 100%">
+        <img src="content2.JPG" style="width: 100%">
+    </div>
+    <div class="sidebar1"><img src="sidebar_right.JPG" style="width: 100%"></div>
+</div>
+</body>
+</html>

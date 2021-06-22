@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>tao layout rwd</title>
+    <style>
+        .header{grid-area: header}
+        .sidebar{grid-area: sidebar}
+        .content{grid-area: content}
+        .sidebarright{grid-area: sidebarright}
+        .footer{grid-area: footer}
+        .container{
+            display: grid;
+            grid-template-areas:
+                'header header header header header header header header header header header header'
+                'sidebar sidebar content content content content content content content content sidebarright sidebarright'
+                'footer footer footer footer footer footer footer footer footer footer footer footer';
+        }
+        .header{
+            background-color: #151316;
+            height: 50px;
+        }
+        .container .header .header1 div{
+            display: inline-block;
+            width: 6%;
+            float: left;
+            text-align: center;
+            color: white;
+            margin-top: 1px;
+            padding: 14px 0px 14px 0px;
+        }
+        .sidebar div a{
+            text-decoration: none;
+            color: #42c1ff;
+        }
+        .sidebar{
+            width: 250px;
+            background-color: antiquewhite;
+            text-align: center;
+
+        }
+        .sidebar div{
+            margin: 10px;
+        }
+
+        .sidebarright{
+
+            width: 250px;
+            background-color: antiquewhite;
+        }
+        .sidebarright div{
+            text-align: center;
+            width: 80px;
+            font-size: 20px;
+            margin: 50px;
+            border-style: ridge;
+            padding: 30px;
+        }
+        .content{
+            margin: 10px;
+        }
+        .footer{
+            background-color: black;
+            color: white;
+            text-align: center;
+            height: 50px;
+        }
+        .header1 div:hover{
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <div class="header1">
+            <div>Logo</div>
+            <div>Home</div>
+            <div>About</div>
+            <div>Projects</div>
+            <div>Contact</div>
+            <div style="float: right">Login</div>
+        </div>
+    </div>
+    <div class="sidebar">
+        <div><a href="#">Link</a> </div>
+        <div><a href="#">Link</a> </div>
+        <div><a href="#">Link</a> </div>
+    </div>
+    <div class="content">
+        <h1>Welcome</h1>
+        <div>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque in ligula at nunc iaculis ullamcorper.
+                Vestibulum non efficitur neque. Fusce eu felis vitae sapien finibus bibendum a sed quam.
+                Nullam euismod nisi ac mattis commodo. Aenean euismod id massa quis aliquam. Duis nec magna velit.
+                Vestibulum a tellus eros. Praesent ac sem libero. Praesent volutpat, massa nec tincidunt aliquam, lectus libero
+                posuere sem, vitae posuere tortor lorem eget urna.</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque in ligula at nunc iaculis ullamcorper.
+                Vestibulum non efficitur neque. Fusce eu felis vitae sapien finibus bibendum a sed quam.
+                Nullam euismod nisi ac mattis commodo. Aenean euismod id massa quis aliquam. Duis nec magna velit.
+                Vestibulum a tellus eros. Praesent ac sem libero. Praesent volutpat, massa nec tincidunt aliquam, lectus libero
+                posuere sem, vitae posuere tortor lorem eget urna.</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque in ligula at nunc iaculis ullamcorper.
+                Vestibulum non efficitur neque. Fusce eu felis vitae sapien finibus bibendum a sed quam.
+                Nullam euismod nisi ac mattis commodo. Aenean euismod id massa quis aliquam. Duis nec magna velit.
+                Vestibulum a tellus eros. Praesent ac sem libero. Praesent volutpat, massa nec tincidunt aliquam, lectus libero
+                posuere sem, vitae posuere tortor lorem eget urna.</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque in ligula at nunc iaculis ullamcorper.
+                Vestibulum non efficitur neque. Fusce eu felis vitae sapien finibus bibendum a sed quam.
+                Nullam euismod nisi ac mattis commodo. Aenean euismod id massa quis aliquam. Duis nec magna velit.
+                Vestibulum a tellus eros. Praesent ac sem libero. Praesent volutpat, massa nec tincidunt aliquam, lectus libero
+                posuere sem, vitae posuere tortor lorem eget urna.</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque in ligula at nunc iaculis ullamcorper.
+                Vestibulum non efficitur neque. Fusce eu felis vitae sapien finibus bibendum a sed quam.
+                Nullam euismod nisi ac mattis commodo. Aenean euismod id massa quis aliquam. Duis nec magna velit.
+                Vestibulum a tellus eros. Praesent ac sem libero. Praesent volutpat, massa nec tincidunt aliquam, lectus libero
+                posuere sem, vitae posuere tortor lorem eget urna.</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque in ligula at nunc iaculis ullamcorper.
+                Vestibulum non efficitur neque. Fusce eu felis vitae sapien finibus bibendum a sed quam.
+                Nullam euismod nisi ac mattis commodo. Aenean euismod id massa quis aliquam. Duis nec magna velit.
+                Vestibulum a tellus eros. Praesent ac sem libero. Praesent volutpat, massa nec tincidunt aliquam, lectus libero
+                posuere sem, vitae posuere tortor lorem eget urna.</p>
+
+        </div>
+
+    </div>
+    <div class="sidebarright">
+        <div>ADS</div>
+        <div>ADS</div>
+    </div>
+    <div class="footer"><p>footer text</p></div>
+</div>
+</body>
+</html>
