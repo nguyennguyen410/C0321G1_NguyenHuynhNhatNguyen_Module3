@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>xem hoat hinh</title>
+    <style>
+        .header{grid-area: header}
+        .header-link{grid-area: headerlink}
+        .left-content{grid-area: leftcontent}
+        .right-content{grid-area: rightcontent}
+        .footer{grid-area: footer}
+
+        .container {
+            display: grid;
+            grid-template-areas:
+                'header header header'
+                'headerlink headerlink headerlink'
+                'leftcontent rightcontent rightcontent'
+                'footer footer footer';
+            grid-gap: 5px;
+        }
+        .header {
+            background-color: antiquewhite;
+            height: 30px;
+            padding-top: 15px;
+        }
+        .header-link {
+            background-color: antiquewhite;
+            text-align: center;
+            height: 30px;
+        }
+        .header-link span{
+            margin: 0px 30px 0px 30px;
+            font-weight: bold;
+        }
+        .header-link a{
+            text-decoration: none;
+            color: black;
+        }
+        .footer{
+            background-color: antiquewhite;
+            text-align: center;
+            height: 40px;
+            padding-top: 20px;
+        }
+        @media only screen and (max-width: 1500px){
+            .container {
+                display: grid;
+                grid-template-areas:
+                        'header'
+                        'headerlink'
+                        'rightcontent'
+                        'leftcontent'
+                        'footer';
+            }
+        }
+        .left-content div:hover{
+            font-weight: bold;
+            color: red;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">PHIM HOAT HINH</div>
+    <div class="header-link">
+        <a href="#">Phim hoạt hình</a><span>   |   </span>
+        <a href="#">Phim hoạt hình yêu thích</a><span>   |   </span>
+        <a href="#">Nhân vật hoạt hình</a><span>   |   </span>
+        <a href="#">Góp ý</a>
+    </div>
+    <div class="left-content">
+        <div>
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/tk_AtKZ49Dg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <p>phim 1</p>
+        </div>
+        <div>
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/tsTmO4J60mQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <p>Phim 2</p>
+        </div>
+
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/w3dpMRg8NgI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/6LiOvVmsahY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+    <div class="right-content">
+        <iframe width="920" height="515" src="https://www.youtube.com/embed/PQKya_ehN1s" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <p>Doraemon (ドラえもん? tên cũ tại Việt Nam là Đôrêmon) là nhân vật chính hư cấu trong loạt Manga cùng tên của họa sĩ Fujiko F. Fujio. Trong truyện lấy bối cảnh ở thế kỷ 22, Doraemon là chú mèo robot của tương lai do xưởng Matsushiba — công xưởng chuyên sản xuất robot vốn dĩ nhằm mục đích chăm sóc trẻ nhỏ. Ban đầu, chú mèo vốn dĩ thuộc sở hữu của cậu bé Sewashi, là con cháu năm đời sau của Nobita nhưng về sau Sewashi gửi lại cho ông Nobita của mình nhằm cải thiện cuộc sống của ông mình do Nobita là người hậu đậu, vụng về, luôn gặp trắc trở trong cuộc sống mà dẫn đến các thế hệ con cháu sau này phải sống trong cảnh nghèo khổ trong đó có Sewashi. Doraemon có một chiếc túi thần kì nhỏ trước bụng mà bên trong chứa vô vàn bảo bối tiện ích của tương lai chính vì vậy mà thường xuyên bị Nobita vòi vĩnh mượn.
+
+            Theo như lời kể của họa sĩ Fujiko, trong một đêm ông đang tìm kiếm đề tài và nhân vật cho một bộ truyện tranh tâm đắc thì một con mèo hoang nhảy vào nhà, nó kêu vài tiếng rồi nhảy vào lòng ông mà ngủ. Do quá mệt mỏi Fujiko cũng thiếp đi lúc nào không biết. Sáng hôm sau thức dậy, ông vội vàng bước xuống cầu thang và vấp phải con lật đật của cô con gái, từ đó sinh ra sự kết hợp giữa lật đật và mèo và ra đời nhân vật Doraemon. Ngoài nước da màu xanh không có tai, bàn tay tròn vo thì Fujiko còn đính kèm một cái chuông vàng ở cổ với dãy ruy băng màu đỏ đậm. Bộ manga ba lần được chuyển thể thành anime với nhiều người đã lồng tiếng cho nhân vật. Ở phiên bản chuyển thể năm 1973 do Tomita Kōsei lồng tiếng từ tập 1 đến tập 13 còn từ tập 14 trở đi là Nozawa Masako. Ở phiên bản 1979 đến tháng 3 năm 2005 là Ōyama Nobuyo. Từ tháng 4 năm 2005 đến nay, Doraemon do Mizuta Wasabi lồng tiếng.
+
+            Không chỉ nổi tiếng tại quê nhà Nhật Bản mà Doraemon còn được biết đến ở nhiều quốc gia khác nhau trên thế giới. Năm 2002, Doraemon được tạp chí Time Asia bình chọn là một trong hai mươi hai người hùng đáng yêu nhất của châu Á. Không những vậy, vào năm 2008, được Chính phủ Nhật Bản chọn làm đại sứ hoạt hình của Nhật Bản trong một buổi lễ do đích thân Ngoại trưởng Nhật Bản Komura Masahiko chủ trì. Trước đó vào năm 2007, Oricon xếp Doraemon vị trí thứ hai trong danh sách các nhân vật manga quyền năng nhất. Thậm chí nhân vật còn được thành phố Kawasaki cấp hộ khẩu như là một công dân chính thức năm 2012. Hàng loạt các sản phẩm thương mại ăn theo như thú nhồi bông, figure,... Bên cạnh việc xuất hiện trong Doraemon, Doraemon thỉnh thoảng còn xuất hiện trong Doraemon bóng chày và Đội quân Doraemon' — là một chuyển thể khác của Doraemon nhưng không do họa sĩ Fujiko chấp bút cũng như trong các trò chơi điện tử.</p>
+    </div>
+    <div class="footer">Footer</div>
+</div>
+
+</body>
+</html>
