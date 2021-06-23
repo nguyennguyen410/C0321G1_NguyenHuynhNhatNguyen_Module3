@@ -16,6 +16,22 @@
                 'sidebar sidebar content content content content content content content content sidebarright sidebarright'
                 'footer footer footer footer footer footer footer footer footer footer footer footer';
         }
+        @media only screen and (max-width: 800px){
+            .container {
+                display: grid;
+                grid-template-areas:
+                        'header header '
+                        'sidebar sidebarright'
+                        'content content'
+                        'footer footer';
+            }
+            .header1 {
+                visibility: hidden;
+            }
+            .header1 #login {
+                visibility: visible;
+            }
+        }
         .header{
             background-color: #151316;
             height: 50px;
@@ -79,7 +95,7 @@
             <div>About</div>
             <div>Projects</div>
             <div>Contact</div>
-            <div style="float: right">Login</div>
+            <div style="float: right" id="login">Login</div>
         </div>
     </div>
     <div class="sidebar">
