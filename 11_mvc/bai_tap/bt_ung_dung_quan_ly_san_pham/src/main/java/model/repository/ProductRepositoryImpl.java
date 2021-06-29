@@ -34,6 +34,12 @@ public class ProductRepositoryImpl implements ProductRepository{
 
     @Override
     public Product findByName(String name) {
+        List<Product> product = findAll();
+        for (Product product1: product){
+            if(name.equals(product1.getName())){
+                return product1;
+            }
+        }
         return null;
     }
 
