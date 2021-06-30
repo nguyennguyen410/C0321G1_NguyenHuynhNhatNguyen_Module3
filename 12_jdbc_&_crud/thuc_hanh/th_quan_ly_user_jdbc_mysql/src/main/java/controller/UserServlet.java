@@ -100,6 +100,9 @@ public class UserServlet extends HttpServlet {
             case "search":
                 showSearchForm(request, response);
                 break;
+            case "sort":
+                showSortForm(request, response);
+                break;
             default:
                 try {
                     listUser(request, response);
@@ -108,6 +111,13 @@ public class UserServlet extends HttpServlet {
                 }
                 break;
         }
+    }
+
+    private void showSortForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        List<User> listUser = userServiceImpl.sortByName();
+        request.setAttribute("listUser", listUser);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("user/sort.jsp");
+        dispatcher.forward(request, response);
     }
 
     private void showSearchForm(HttpServletRequest request, HttpServletResponse response) throws IOException {

@@ -21,9 +21,6 @@
     <h2>
         <a href="/user?action=search">Search User</a>
     </h2>
-    <h2>
-        <a href="/user?action=sort">Sort By Name</a>
-    </h2>
 </center>
 <div align="center">
     <table border="1" cellpadding="5">
@@ -51,3 +48,4 @@
 </div>
 </body>
 </html>
+

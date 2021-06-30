@@ -12,6 +12,9 @@ import java.util.List;
 
 public class UserServiceImpl implements UserService{
     private UserRepositoryImpl userRepository = new UserRepositoryImpl();
+    public List<User> sortByName() {
+        return userRepository.sortByName();
+    }
     public List<User> searchByCountry(String country){
         return userRepository.searchByCountry(country);
     }
