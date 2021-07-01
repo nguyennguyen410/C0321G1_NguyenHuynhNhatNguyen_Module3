@@ -1,6 +1,5 @@
 package model.repository;
 
-import model.bean.DBConnection;
 import model.bean.User;
 
 import java.sql.*;
