@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="th_dong_goi_thu_vien_java_jar">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/../th_dong_goi_thu_vien_java/out/artifacts/th_dong_goi_thu_vien_java_jar" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+    <jarDirectory url="file://$PROJECT_DIR$/../th_dong_goi_thu_vien_java/out/artifacts/th_dong_goi_thu_vien_java_jar" recursive="false" />
+  </library>
+</component>

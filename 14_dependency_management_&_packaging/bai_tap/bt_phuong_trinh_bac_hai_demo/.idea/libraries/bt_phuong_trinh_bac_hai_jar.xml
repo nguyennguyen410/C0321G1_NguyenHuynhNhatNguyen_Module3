@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="bt_phuong_trinh_bac_hai_jar">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/../bt_phuong_trinh_bac_hai/out/artifacts/bt_phuong_trinh_bac_hai_jar" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+    <jarDirectory url="file://$PROJECT_DIR$/../bt_phuong_trinh_bac_hai/out/artifacts/bt_phuong_trinh_bac_hai_jar" recursive="false" />
+  </library>
+</component>
