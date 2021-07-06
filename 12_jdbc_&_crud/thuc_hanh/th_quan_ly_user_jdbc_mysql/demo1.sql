@@ -47,3 +47,28 @@ insert into Permision(id, name) values(2, 'edit');
 insert into Permision(id, name) values(3, 'delete');
 insert into Permision(id, name) values(4, 'view');
 
+DELIMITER $$
+CREATE PROCEDURE select_all_user()
+BEGIN
+    select * from users;
+END$$
+DELIMITER ;
+call select_all_user();
+
+DELIMITER $$
+CREATE PROCEDURE update_user(id1 int, name1 varchar(120), email1 varchar(220), country1 varchar(120) )
+BEGIN
+    update users
+    set `name` = name1, email = email1, country = country1
+    where users.id = id1;
+END$$
+DELIMITER ;
+call select_all_user();
+
+DELIMITER $$
+CREATE PROCEDURE delete_user(id1 int)
+BEGIN
+    delete from users
+    where users.id = id1;
+END$$
+DELIMITER ;

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="fa5848c3-ebcf-4998-a2fb-6886545f917b" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../../case_study_module3_jsp_&amp;_servlet/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../case_study_module3_jsp_&amp;_servlet/furama_resort/src/main/java/model/bean/Customer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../case_study_module3_jsp_&amp;_servlet/furama_resort/src/main/java/model/bean/CustomerType.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../case_study_module3_jsp_&amp;_servlet/furama_resort/src/main/webapp/Images/Vietnam_Danang_Furama_Resort_Exterior-Furama-girl-with-pink-hat.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../case_study_module3_jsp_&amp;_servlet/furama_resort/src/main/webapp/Images/Vietnam_Danang_Furama_Resort_Exterior_Ocean-Pool-6.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../case_study_module3_jsp_&amp;_servlet/furama_resort/src/main/webapp/css/footer.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../12_jdbc_&amp;_crud/thuc_hanh/th_quan_ly_user_jdbc_mysql/demo1.sql" beforeDir="false" afterPath="$PROJECT_DIR$/../../12_jdbc_&amp;_crud/thuc_hanh/th_quan_ly_user_jdbc_mysql/demo1.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../apache-tomcat-9.0.48/webapps/ROOT/WEB-INF/classes/controller/UserServlet.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../apache-tomcat-9.0.48/webapps/ROOT/WEB-INF/classes/model/bean/User.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../apache-tomcat-9.0.48/webapps/ROOT/WEB-INF/classes/model/repository/DBConnection.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../apache-tomcat-9.0.48/webapps/ROOT/WEB-INF/classes/model/repository/UserRepository.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../apache-tomcat-9.0.48/webapps/ROOT/WEB-INF/classes/model/repository/UserRepositoryImpl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../apache-tomcat-9.0.48/webapps/ROOT/WEB-INF/classes/model/service/UserService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../apache-tomcat-9.0.48/webapps/ROOT/WEB-INF/classes/model/service/UserServiceImpl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../apache-tomcat-9.0.48/webapps/ROOT/user/bootstrap-4.6.0-dist/css/bootstrap-grid.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../apache-tomcat-9.0.48/webapps/ROOT/user/bootstrap-4.6.0-dist/css/bootstrap-grid.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../apache-tomcat-9.0.48/webapps/ROOT/user/bootstrap-4.6.0-dist/css/bootstrap-grid.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../apache-tomcat-9.0.48/webapps/ROOT/user/bootstrap-4.6.0-dist/css/bootstrap-grid.min.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../apache-tomcat-9.0.48/webapps/ROOT/user/bootstrap-4.6.0-dist/css/bootstrap-reboot.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../apache-tomcat-9.0.48/webapps/ROOT/user/bootstrap-4.6.0-dist/css/bootstrap-reboot.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../apache-tomcat-9.0.48/webapps/ROOT/user/bootstrap-4.6.0-dist/css/bootstrap-reboot.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../apache-tomcat-9.0.48/webapps/ROOT/user/bootstrap-4.6.0-dist/css/bootstrap-reboot.min.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../apache-tomcat-9.0.48/webapps/ROOT/user/bootstrap-4.6.0-dist/css/bootstrap.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../apache-tomcat-9.0.48/webapps/ROOT/user/bootstrap-4.6.0-dist/css/bootstrap.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../apache-tomcat-9.0.48/webapps/ROOT/user/bootstrap-4.6.0-dist/css/bootstrap.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../apache-tomcat-9.0.48/webapps/ROOT/user/bootstrap-4.6.0-dist/css/bootstrap.min.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../apache-tomcat-9.0.48/webapps/ROOT/user/bootstrap-4.6.0-dist/jquery/jquery-3.5.1.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../apache-tomcat-9.0.48/webapps/ROOT/user/bootstrap-4.6.0-dist/jquery/popper.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../apache-tomcat-9.0.48/webapps/ROOT/user/bootstrap-4.6.0-dist/js/bootstrap.bundle.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../apache-tomcat-9.0.48/webapps/ROOT/user/bootstrap-4.6.0-dist/js/bootstrap.bundle.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../apache-tomcat-9.0.48/webapps/ROOT/user/bootstrap-4.6.0-dist/js/bootstrap.bundle.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../apache-tomcat-9.0.48/webapps/ROOT/user/bootstrap-4.6.0-dist/js/bootstrap.bundle.min.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../apache-tomcat-9.0.48/webapps/ROOT/user/bootstrap-4.6.0-dist/js/bootstrap.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../apache-tomcat-9.0.48/webapps/ROOT/user/bootstrap-4.6.0-dist/js/bootstrap.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../apache-tomcat-9.0.48/webapps/ROOT/user/bootstrap-4.6.0-dist/js/bootstrap.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../apache-tomcat-9.0.48/webapps/ROOT/user/bootstrap-4.6.0-dist/js/bootstrap.min.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../apache-tomcat-9.0.48/webapps/ROOT/user/create.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../apache-tomcat-9.0.48/webapps/ROOT/user/edit.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../apache-tomcat-9.0.48/webapps/ROOT/user/index.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../apache-tomcat-9.0.48/webapps/ROOT/user/list.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../apache-tomcat-9.0.48/webapps/ROOT/user/search-value.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../apache-tomcat-9.0.48/webapps/ROOT/user/search.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../apache-tomcat-9.0.48/webapps/ROOT/user/sort.jsp" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="ProjectId" id="1uvKyZGzaoBRvGxYhx4o2RenahS" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="fa5848c3-ebcf-4998-a2fb-6886545f917b" name="Default Changelist" comment="" />
+      <created>1625540877344</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1625540877344</updated>
+      <workItem from="1625540883046" duration="25000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="2" />
+  </component>
+</project>
