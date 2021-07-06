@@ -23,15 +23,16 @@ public class CustomerRepositoryImpl implements CustomerRepository {
         if (connection != null) {
             try {
                 preparedStatement = connection.prepareCall(INSERT_CUSTOMERS);
-                preparedStatement.setInt(1, customer.getCustomerTypeId());
-                preparedStatement.setString(2, customer.getCustomerName());
-                preparedStatement.setString(3, customer.getCustomerBirthday());
-                preparedStatement.setInt(4, customer.getCustomerGender());
-                preparedStatement.setString(5, customer.getCustomerIdCard());
-                preparedStatement.setString(6, customer.getCustomerPhone());
-                preparedStatement.setString(7, customer.getCustomerEmail());
-                preparedStatement.setString(8, customer.getCustomerAddress());
-                preparedStatement.setString(9, customer.getCustomerId());
+                preparedStatement.setString(1, customer.getCustomerId());
+                preparedStatement.setInt(2, customer.getCustomerTypeId());
+                preparedStatement.setString(3, customer.getCustomerName());
+                preparedStatement.setString(4, customer.getCustomerBirthday());
+                preparedStatement.setInt(5, customer.getCustomerGender());
+                preparedStatement.setString(6, customer.getCustomerIdCard());
+                preparedStatement.setString(7, customer.getCustomerPhone());
+                preparedStatement.setString(8, customer.getCustomerEmail());
+                preparedStatement.setString(9, customer.getCustomerAddress());
+
                 preparedStatement.executeUpdate();
             } catch (SQLException throwables) {
                 throwables.printStackTrace();

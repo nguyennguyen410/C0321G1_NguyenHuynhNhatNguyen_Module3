@@ -33,7 +33,7 @@
           <a class="nav-link" href="/customer?action=homeCustomer">Customer <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item active">
-          <a class="nav-link" href="#">Service <span class="sr-only">(current)</span></a>
+          <a class="nav-link" href="/service?action=homeService">Service <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item active">
           <a class="nav-link" href="#">Contract <span class="sr-only">(current)</span></a>
