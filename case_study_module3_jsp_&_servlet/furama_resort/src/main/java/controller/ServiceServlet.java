@@ -1,5 +1,7 @@
 package controller;
 
+import Validate.Validate;
+import model.bean.AttachService;
 import model.bean.Customer;
 import model.bean.Service;
 import model.service.ServiceServiceImpl;
@@ -12,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 
 @WebServlet(name = "ServiceServlet", value = "/service")
 public class ServiceServlet extends HttpServlet {
@@ -38,6 +41,11 @@ public class ServiceServlet extends HttpServlet {
 
     private void insertService(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
         String serviceId = request.getParameter("serviceId");
+        if(Validate.validateServiceId(serviceId)!=null){
+            request.setAttribute("messService", "Service Id like DV-XXXX (X: 0-9)");
+            showCreateServiceForm(request,response);
+            return;
+        }
         String serviceName = request.getParameter("serviceName") ;
         int serviceArea = Integer.parseInt(request.getParameter("serviceArea"));
         double serviceCost = Double.parseDouble(request.getParameter("serviceCost"));
@@ -48,8 +56,17 @@ public class ServiceServlet extends HttpServlet {
         String descriptionOtherConvenience = request.getParameter("descriptionOtherConvenience");
         double poolArea = Double.parseDouble(request.getParameter("poolArea"));
         int numberOfFloor = Integer.parseInt(request.getParameter("numberOfFloor"));
+        if(Validate.validateNumber(request.getParameter("numberOfFloor"))!=null){
+            request.setAttribute("messNumber", "Number invalid");
+            showCreateServiceForm(request,response);
+            return;
+        }
+
+        /*double totalMoney = serviceCost * rentTypeId;
+        request.setAttribute("totalMoney", totalMoney);*/
         Service service = new Service(serviceId,serviceName,serviceArea,serviceCost,serviceMaxPeople,rentTypeId,serviceTypeId,standardRoom,descriptionOtherConvenience,poolArea,numberOfFloor);
         serviceService.insertService(service);
+
         RequestDispatcher dispatcher = request.getRequestDispatcher("create-service.jsp");
         dispatcher.forward(request, response);
     }
@@ -67,9 +84,27 @@ public class ServiceServlet extends HttpServlet {
             case "create":
                 showCreateServiceForm(request, response);
                 break;
+            case "listServiceUsed":
+                try {
+                    showList(request, response);
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+                break;
             default:
                 break;
         }
+    }
+
+    private void showList(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
+        List<Service> listServiceUsed = serviceService.selectServiceUsed();
+        List<Customer> listCustomerUsed = serviceService.selectCustomerUsed();
+        List<AttachService> listAttachServiceUsed = serviceService.selectAttachServiceUsed();
+        request.setAttribute("listServiceUsed", listServiceUsed);
+        request.setAttribute("listCustomerUsed", listCustomerUsed);
+        request.setAttribute("listAttachUsed", listAttachServiceUsed);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("list-service-used.jsp");
+        dispatcher.forward(request, response);
     }
 
     private void showCreateServiceForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

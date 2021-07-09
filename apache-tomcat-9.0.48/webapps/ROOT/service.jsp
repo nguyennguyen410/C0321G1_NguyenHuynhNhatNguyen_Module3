@@ -52,6 +52,9 @@
             <button type="button" class="list-group-item list-group-item-action active">
                 <a href="/service?action=create" style="color: white">Create Service</a>
             </button>
+            <button type="button" class="list-group-item list-group-item-action active">
+                <a href="/service?action=listServiceUsed" style="color: white">List Service Is Used</a>
+            </button>
             <%--<button type="button" class="list-group-item list-group-item-action">
                 <a href="/customer?action=listCustomer" style="color: darkblue">List Customer</a>
             </button>

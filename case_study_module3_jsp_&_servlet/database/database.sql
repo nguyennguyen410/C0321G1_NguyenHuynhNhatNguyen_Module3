@@ -63,14 +63,6 @@ foreign key (rent_type_id) references rent_type(rent_type_id) on update cascade 
 foreign key (service_type_id) references service_type(service_type_id) on update cascade on delete cascade
 );
 
-create table attach_service(
-attach_service_id int primary key,
-attach_service_name varchar(45),
-attach_service_cost double,
-attach_service_unit int,
-attach_service_status varchar(45)
-);
-
 create table role(
 role_id int primary key,
 role_name varchar(255)
@@ -80,6 +72,14 @@ create table user(
 username varchar(255) primary key,
 `password` varchar(255)
 );
+insert into user
+value
+('userha','123456');
+
+insert into user
+value
+('userha1','123456');
+
 
 create table user_role(
 role_id int,
@@ -92,16 +92,36 @@ create table `position`(
 position_id int primary key,
 position_name varchar(45)
 );
+insert into `position`
+value
+(1,'Le tan'),
+(2,'Phuc vu'),
+(3,'Giam sat'),
+(4,'Chuyen vien'),
+(5,'Quan ly'),
+(6,'Giam doc');
 
 create table education_degree(
 education_degree_id int primary key,
 education_degree_name varchar(45)
 );
+insert into education_degree
+value
+(1,'Trung cap'),
+(2,'Cao dang'),
+(3,'Dai hoc'),
+(4,'Sau dai hoc');
 
 create table division(
 division_id int primary key,
 division_name varchar(45)
 );
+insert into division
+value
+(1,'Sale-marketing'),
+(2,'Hanh chinh'),
+(3,'Phuc vu'),
+(4,'Quan ly');
 
 create table employee(
 employee_id int primary key,
@@ -121,6 +141,20 @@ foreign key (education_degree_id) references education_degree(education_degree_i
 foreign key (division_id) references division(division_id) on update cascade on delete cascade,
 foreign key (username) references user(username) on update cascade on delete cascade
 );
+
+create table attach_service(
+attach_service_id int primary key,
+attach_service_name varchar(45),
+attach_service_cost double,
+attach_service_unit int,
+attach_service_status varchar(45)
+);
+
+insert into attach_service
+values
+(1, 'massage', '1000000', 1, 'hoat dong'),
+(2, 'karaoke', '5000000', 1, 'hoat dong'),
+(3, 'thue xe', '2000000', 1, 'hoat dong');
 
 create table contract(
 contract_id int primary key,

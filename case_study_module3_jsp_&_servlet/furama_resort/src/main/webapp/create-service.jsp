@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: nguye
@@ -71,6 +72,9 @@
                         <th>Service Id:</th>
                         <td>
                             <input type="text" name="serviceId" id="serviceId" size="45"/>
+                            <c:if test="${messService != null}">
+                                <small id="customerServiceValidate" class="form-text text-danger">${messService}</small>
+                            </c:if>
                         </td>
                     </tr>
                     <tr>
@@ -89,6 +93,7 @@
                         <th>Service Cost:</th>
                         <td>
                             <input type="text" name="serviceCost" id="serviceCost" size="45"/>
+                            <label id="totalMoney"></label>
                         </td>
                     </tr>
                     <tr>
@@ -100,7 +105,7 @@
                     <tr>
                         <th>Rent Type Id:</th>
                         <td>
-                            <input type="text" name="rentTypeId" id="rentTypeId" size="45"/>
+                            <input oninput="totalMoney()" type="text" name="rentTypeId" id="rentTypeId" size="45"/>
                         </td>
                     </tr>
                     <tr>
@@ -131,6 +136,9 @@
                         <th>Number Of Floor:</th>
                         <td>
                             <input type="text" name="numberOfFloor" id="numberOfFloor" size="45"/>
+                            <c:if test="${messNumber != null}">
+                                <small id="ServiceNumberFloorValidate" class="form-text text-danger">${messNumber}</small>
+                            </c:if>
                         </td>
                     </tr>
                     <tr>
@@ -198,6 +206,14 @@
         </div>
     </footer>
 </div>
+<script>
+    function totalMoney() {
+        let a = parseFloat(document.getElementById("serviceCost").value);
+        let b = parseFloat(document.getElementById("rentTypeId").value);
+        let c = a * b;
+        document.getElementById("totalMoney").innerText="Total Money: "+ c;
+    }
+</script>
 </body>
 </html>
 

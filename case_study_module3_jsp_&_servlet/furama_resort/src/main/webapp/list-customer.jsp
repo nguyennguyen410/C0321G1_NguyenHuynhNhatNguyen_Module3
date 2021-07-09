@@ -19,7 +19,8 @@
     <img src="Images/logo.png">
 </div>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
 
@@ -63,8 +64,9 @@
     </div>
     <div class="col-md-9">
         <div align="center">
-            <table border="1" cellpadding="5">
-                <caption><h2>List of Customer</h2></caption>
+            <caption><h2>List of Customer</h2></caption>
+            <table id="tableCustomer" class="table table-striped table-bordered w-100 d-inline-block" style="overflow-x: scroll">
+                <thead>
                 <tr>
                     <th>Customer ID</th>
                     <th>Customer Type ID</th>
@@ -75,7 +77,10 @@
                     <th>Customer Phone</th>
                     <th>Customer Email</th>
                     <th>Customer Address</th>
+                    <th>edit/delete</th>
                 </tr>
+                </thead>
+                <tbody>
                 <c:forEach var="customer" items="${listCustomer}">
                     <tr>
                         <td><c:out value="${customer.customerId}"/></td>
@@ -88,36 +93,43 @@
                         <td><c:out value="${customer.customerEmail}"/></td>
                         <td><c:out value="${customer.customerAddress}"/></td>
                         <td>
-                            <a href="/customer?action=editCustomer&customerId=${customer.customerId}">Edit</a>
-                            <button onclick="onDelete('${customer.customerId}','${customer.customerName}')" type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">Delete</button>
+                            <a class="btn btn-warning" href="/customer?action=editCustomer&customerId=${customer.customerId}">Edit</a>
+                            <button onclick="onDelete('${customer.customerId}','${customer.customerName}')"
+                                    type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">
+                                Delete
+                            </button>
                         </td>
                     </tr>
                 </c:forEach>
-                <!-- Modal -->
-                <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Delete <input readonly style="outline: none; border: none;" type="text" id="userName"></h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <form action="/customer" method="get">
-                                <input type="hidden" name="action" value="deleteCustomer">
-                                <input type="hidden" name="customerId" value="" id="customerId">
-                                <div class="modal-body">
-                                    Delete <span id="userName1"></span>, Are you sure?
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    <button type="submit" class="btn btn-primary">Save changes</button>
-                                </div>
-                            </form>
+                </tbody>
+            </table>
+            <!-- Modal -->
+            <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Delete <input readonly
+                                                                                         style="outline: none; border: none;"
+                                                                                         type="text" id="userName"></h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
                         </div>
+                        <form action="/customer" method="get">
+                            <input type="hidden" name="action" value="deleteCustomer">
+                            <input type="hidden" name="customerId" value="" id="customerId">
+                            <div class="modal-body">
+                                Delete <span id="userName1"></span>, Are you sure?
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary">Save changes</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
-            </table>
+            </div>
         </div>
     </div>
 </div>
@@ -127,7 +139,8 @@
             <div class="row">
                 <div class="col-sm-12 col-md-6">
                     <h6>About</h6>
-                    <p class="text-justify">103 - 105 Vo Nguyen Giap Street, Khue My Ward, Ngu Hanh Son District, Danang City, Vietnam
+                    <p class="text-justify">103 - 105 Vo Nguyen Giap Street, Khue My Ward, Ngu Hanh Son District, Danang
+                        City, Vietnam
                         Tel.: 84-236-3847 333/888 * Fax: 84-236-3847 666
                         Email: reservation@furamavietnam.com * www.furamavietnam.com</div>
 
@@ -178,10 +191,19 @@
 </div>
 <script>
     function onDelete(customerId, customerName) {
-        document.getElementById("customerId").value= customerId;
-        document.getElementById("userName").value= customerName;
+        document.getElementById("customerId").value = customerId;
+        document.getElementById("userName").value = customerName;
         document.getElementById("userName1").innerText = customerName;
     }
+</script>
+<script>
+    $(document).ready(function () {
+        $('#tableCustomer').dataTable({
+            "dom": 'lrtip',
+            "lengthChange": false,
+            "pageLength": 2
+        });
+    });
 </script>
 </body>
 </html>

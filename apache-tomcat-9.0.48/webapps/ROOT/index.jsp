@@ -27,7 +27,7 @@
           <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item active">
-          <a class="nav-link" href="#">Employee <span class="sr-only">(current)</span></a>
+          <a class="nav-link" href="/employee?action=homeEmployee">Employee <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item active">
           <a class="nav-link" href="/customer?action=homeCustomer">Customer <span class="sr-only">(current)</span></a>
@@ -36,7 +36,7 @@
           <a class="nav-link" href="/service?action=homeService">Service <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item active">
-          <a class="nav-link" href="#">Contract <span class="sr-only">(current)</span></a>
+          <a class="nav-link" href="/contract?action=homeContract">Contract <span class="sr-only">(current)</span></a>
         </li>
       </ul>
       <form class="form-inline my-2 my-lg-0">

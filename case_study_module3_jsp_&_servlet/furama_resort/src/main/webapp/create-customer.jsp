@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: nguye
@@ -70,55 +71,70 @@
                     <tr>
                         <th>Customer Id:</th>
                         <td>
-                            <input type="text" name="customerId" id="customerId" size="45"/>
+                            <input value="${newCustomer.customerId}" type="text" name="customerId" id="customerId" size="45"/>
+                            <c:if test="${messCustomer != null}">
+                                <small id="customerIdValidate" class="form-text text-danger">${messCustomer}</small>
+                            </c:if>
                         </td>
                     </tr>
                     <tr>
                         <th>Customer Type Id:</th>
                         <td>
-                            <input type="text" name="customerTypeId" id="customerTypeId" size="45"/>
+                            <input value="${newCustomer.customerTypeId}" type="text" name="customerTypeId" id="customerTypeId" size="45"/>
                         </td>
                     </tr>
                     <tr>
                         <th>Customer Name:</th>
                         <td>
-                            <input type="text" name="customerName" id="customerName" size="45"/>
+                            <input value="${newCustomer.customerName}" type="text" name="customerName" id="customerName" size="45"/>
                         </td>
                     </tr>
                     <tr>
                         <th>Customer Birthday:</th>
                         <td>
-                            <input type="text" name="customerBirthday" id="customerBirthday" size="45"/>
+                            <input value="${newCustomer.customerBirthday}"  type="text" name="customerBirthday" id="customerBirthday" size="45"/>
+                            <c:if test="${messCustomerDate != null}">
+                                <small id="customerDateValidate" class="form-text text-danger">${messCustomerDate}</small>
+                            </c:if>
                         </td>
                     </tr>
                     <tr>
                         <th>Customer Gender:</th>
                         <td>
-                            <input type="text" name="customerGender" id="customerGender" size="45"/>
+                            <input ${newCustomer.customerGender} type="text" name="customerGender" id="customerGender" size="45"/>
                         </td>
                     </tr>
                     <tr>
                         <th>Customer Id Card:</th>
                         <td>
-                            <input type="text" name="customerIdCard" id="customerIdCard" size="45"/>
+                            <input value="${newCustomer.customerIdCard}"  type="text" name="customerIdCard" id="customerIdCard" size="45"/>
+                            <c:if test="${messCustomerIdCard != null}">
+                                <small id="customerIdCardValidate" class="form-text text-danger">${messCustomerIdCard}</small>
+                            </c:if>
                         </td>
                     </tr>
                     <tr>
                         <th>Customer Phone:</th>
                         <td>
-                            <input type="text" name="customerPhone" id="customerPhone" size="45"/>
+                            <input value="${newCustomer.customerPhone}" type="text" name="customerPhone" id="customerPhone" size="45"/>
+                            <c:if test="${messCustomerPhone != null}">
+                                <small id="customerPhoneValidate" class="form-text text-danger">${messCustomerPhone}</small>
+                            </c:if>
                         </td>
                     </tr>
                     <tr>
                         <th>Customer Email:</th>
                         <td>
-                            <input type="text" name="customerEmail" id="customerEmail" size="45"/>
+                            <input value="${newCustomer.customerEmail}"  type="text" name="customerEmail" id="customerEmail" size="45"/>
+                            <c:if test="${messCustomerEmail != null}">
+                                <small id="customerEmailValidate" class="form-text text-danger">${messCustomerEmail}</small>
+                            </c:if>
                         </td>
                     </tr>
                     <tr>
                         <th>Customer Adress:</th>
                         <td>
-                            <input type="text" name="customerAddress" id="customerAddress" size="45"/>
+                            <input value="${newCustomer.customerAddress}" type="text" name="customerAddress" id="customerAddress" size="45"/>
                         </td>
                     </tr>
                     <tr>

@@ -1,5 +1,6 @@
 package controller;
 
+import Validate.Validate;
 import model.bean.Customer;
 import model.service.CustomerServiceImpl;
 
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 @WebServlet(name = "CustomerServlet", urlPatterns = "/customer")
 public class CustomerServlet extends HttpServlet {
@@ -24,7 +26,7 @@ public class CustomerServlet extends HttpServlet {
         switch (action) {
             case "create":
                 try {
-                    insertCustomer(request, response);
+                    insert(request, response);
                 } catch (SQLException throwables) {
                     throwables.printStackTrace();
                 }
@@ -58,6 +60,48 @@ public class CustomerServlet extends HttpServlet {
 
     private void insertCustomer(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
         String customerId = request.getParameter("customerId");
+        if(Validate.validateCustomerId(customerId)!=null){
+            request.setAttribute("messCustomer", "Customer Id like KH-XXXX (X: 0-9)");
+            showNewForm(request,response);
+            return;
+        }
+        int customerTypeId = Integer.parseInt(request.getParameter("customerTypeId"));
+        String customerName = request.getParameter("customerName");
+        String customerBirthday = request.getParameter("customerBirthday");
+        if(Validate.validateCustomerDate(customerBirthday)!=null){
+            request.setAttribute("messCustomerDate", "Date like YYYY/MM/DD");
+            showNewForm(request,response);
+            return;
+        }
+        int customerGender = Integer.parseInt(request.getParameter("customerGender"));
+        String customerIdCard = request.getParameter("customerIdCard");
+        if(Validate.validateCustomerIdCard(customerIdCard)!=null){
+            request.setAttribute("messCustomerIdCard", "Customer Id Card like XXXXXXXXX (X: 0-9)");
+            showNewForm(request,response);
+            return;
+        }
+        String customerPhone = request.getParameter("customerPhone");
+        if(Validate.validateCustomerPhone(customerPhone)!=null){
+            request.setAttribute("messCustomerPhone", "Customer Phone like (XX)-XXXXXXXXXX (X: 0-9)");
+            showNewForm(request,response);
+            return;
+        }
+        String customerEmail = request.getParameter("customerEmail");
+        if(Validate.validateCustomerEmail(customerEmail)!=null){
+            request.setAttribute("messCustomerEmail", "Customer Email invalid");
+            showNewForm(request,response);
+            return;
+        }
+        String customerAddress = request.getParameter("customerAddress");
+        Customer newCustomer = new Customer(customerId, customerTypeId, customerName, customerBirthday, customerGender, customerIdCard, customerPhone, customerEmail, customerAddress);
+        customerService.insertCustomer(newCustomer);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("create-customer.jsp");
+        dispatcher.forward(request, response);
+
+    }
+
+    private void insert(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
+        String customerId = request.getParameter("customerId");
         int customerTypeId = Integer.parseInt(request.getParameter("customerTypeId"));
         String customerName = request.getParameter("customerName");
         String customerBirthday = request.getParameter("customerBirthday");
@@ -66,11 +110,23 @@ public class CustomerServlet extends HttpServlet {
         String customerPhone = request.getParameter("customerPhone");
         String customerEmail = request.getParameter("customerEmail");
         String customerAddress = request.getParameter("customerAddress");
-        Customer newCustomer = new Customer(customerId, customerTypeId, customerName, customerBirthday, customerGender, customerIdCard, customerPhone, customerEmail, customerAddress);
-        customerService.insertCustomer(newCustomer);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("create-customer.jsp");
-        dispatcher.forward(request, response);
 
+        Customer newCustomer = new Customer(customerId, customerTypeId, customerName, customerBirthday, customerGender, customerIdCard, customerPhone, customerEmail, customerAddress);
+        Map<String, String> mapMessenger = customerService.insert(newCustomer);
+        if (!mapMessenger.isEmpty()){
+            request.setAttribute("newCustomer", newCustomer);
+            request.setAttribute("messCustomer", mapMessenger.get("messCustomer"));
+            request.setAttribute("messCustomerDate", mapMessenger.get("messCustomerDate"));
+            request.setAttribute("messCustomerEmail", mapMessenger.get("messCustomerEmail"));
+            request.setAttribute("messCustomerPhone", mapMessenger.get("messCustomerPhone"));
+            request.setAttribute("messCustomerIdCard", mapMessenger.get("messCustomerIdCard"));
+            showNewForm(request,response);
+            return;
+        }else {
+            customerService.insertCustomer(newCustomer);
+            RequestDispatcher dispatcher = request.getRequestDispatcher("create-customer.jsp");
+            dispatcher.forward(request, response);
+        }
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
